@@ -4,13 +4,15 @@ services:
   pokaplayer:
     build: .
     ports:
-      - "3000"
+      - 3000:3000
     links:
       - neteaseapi2
       - mongodb
     depends_on:
       - neteaseapi2
       - mongodb
+    volumes:
+      - ./config.json:/app/config.json
     
   neteaseapi2:
     build: 
@@ -20,6 +22,6 @@ services:
       - "3000"
       
   mongodb:
-    image: mongo:latest
+    image: mongo:4.0
     command: --smallfiles
     
